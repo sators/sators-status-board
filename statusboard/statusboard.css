@@ -1,0 +1,646 @@
+@charset "utf-8";
+/* **********************************
+// *     Code by Matt Satorius      *
+// *        www.sators.com          *
+// **********************************
+*/
+* {
+padding: 0;
+margin: 0;
+}
+    @font-face {
+      font-family: "Roadgeek";
+      src: url("roadgeek.otf");
+    }
+    @font-face {
+      font-family: "Helvetica";
+      src: local("Helvetica"); url("helvetica.otf");
+	  font-weight: normal;
+    }
+
+body {
+	background-image: url(bg-blackgrad.png);
+	font-family: "Helvetica", Verdana, Arial, Helvetica, sans-serif;
+	color: white;
+	font-size: 18px;
+	overflow: hidden;
+}
+#twitter, #timeofday, #weather, #webcam, .border-gray, #webcam .image, #googlecalendar {
+	-moz-border-radius: .5em;
+	-webkit-border-radius: .5em;
+	border-radius: .5em;
+}
+.border-gray, .ticketlist .title, .ticketlist .entry {
+	-moz-border-radius: .2em;
+	-webkit-border-radius: .2em;
+	border-radius: .2em;
+}
+#timeofday .title, #googlecalendar .title {
+	-moz-border-top-right-radius: .5em;
+	-webkit-border-top-right-radius: .5em;
+	-moz-border-top-left-radius: .5em;
+	-webkit-border-top-left-radius: .5em;
+	border-radius-top-left-radius: .5em;
+	border-radius-top-right-radius: .5em;
+	-moz-border-bottom-right-radius: 0em;
+	-webkit-border-bottom-right-radius: 0em;
+	-moz-border-bottom-left-radius: 0em;
+	-webkit-border-bottom-left-radius: 0em;
+	border-bottom-left-radius: 0em;
+	border-bottom-right-radius: 0em;
+
+}
+.graph {
+	-moz-border-top-right-radius: 1em;
+	-webkit-border-top-right-radius: 1em;
+	-moz-border-top-left-radius: 1em;
+	-webkit-border-top-left-radius: 1em;
+	border-radius-top-left-radius: 1em;
+	border-radius-top-right-radius: 1em;
+}
+.border-gray, .ticketlist .entry, .ticketlist .title, #googlecalendar {
+border: solid 1px #4c4c4c;
+}
+#totalcounts {
+	position: absolute;
+	left: 2%;
+	top: 1%;
+	text-align: center;
+	width: 98%;
+	height: 50px;
+	z-index: 150;
+}
+#total-open, #total-onhold, #total-overdue, #total-repair, #total-parts, #total-out, #total-closed {
+	float:left;
+	background:-webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, rgb(39,39,39)),
+    color-stop(1, rgb(43,43,43)));
+	background: -moz-linear-gradient(
+    center bottom,
+    rgb(39,39,39) 0%,
+    rgb(43,43,43) 100%
+);
+	color: #afafaf;
+	margin-right: 1%;
+	padding-top: 2px;
+}
+#total-trend {
+	position: absolute;
+	right: 2%;
+	top: 1%;
+	text-align: center;
+	z-index: 150;
+	background:-webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, rgb(39,39,39)),
+    color-stop(1, rgb(43,43,43)));
+	background: -moz-linear-gradient(
+    center bottom,
+    rgb(39,39,39) 0%,
+    rgb(43,43,43) 100%
+);
+	color: #afafaf;
+}
+#totalcounts h1, #total-trend h1, .stats, #timeofday #day{
+	font-family: "Roadgeek", Verdana, Arial, Helvetica, sans-serif;
+}
+#totalcounts h1, #total-trend h1 {
+	color: white;
+	line-height: 30px;
+	padding-bottom: 5px;
+} 
+#totalcounts h1#count-overdue {
+	color: red;
+}
+#bargraphs {
+	position: absolute;
+	height: 28%;
+	margin-top: 3%;
+	padding-left: 3%;
+	width: 97%;
+	top: 0;
+	border-bottom: 1px solid #999999;
+}
+.container-graph {
+	position: relative;
+	width: 12%;
+	margin-left: 2%;
+	margin-right: 2%;
+	float: left;
+	height: 100%;
+	text-align: center;
+}
+.graph, .graph-frame {
+	height: 1%;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+.graph {
+	border: solid 1px black;
+}
+.stats {
+	position: absolute;
+	width: 100%;
+	top: -22px;
+	color: #afafaf;
+	font-size: larger;
+}
+.graph-frame .title {
+	position: absolute;
+	width: 100%;
+	bottom: -30px;
+}
+#general .graph {	background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(1, rgb(125,125,250)),
+    color-stop(0, rgb(31,31,255))
+); }
+#audio .graph {	background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.01, rgb(138,0,5)),
+    color-stop(1, rgb(203,0,3))
+); }
+#lighting .graph {	background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.01, rgb(0,148,54)),
+    color-stop(1, rgb(46,248,123))
+); }
+#video .graph {	background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.01, rgb(163,160,0)),
+    color-stop(1, rgb(245,241,26))
+); }
+#cad .graph {	background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(1, rgb(125,250,235)),
+    color-stop(0, rgb(0,179,155))
+); }
+#equipreq .graph {	background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.01, rgb(46,46,46)),
+    color-stop(1, rgb(99,99,99))
+); }
+.overdue { color: red; }
+.open { color: white; }
+
+.container-ticketlists {
+	position: absolute;
+	top: 37%;
+	width: 98%;
+}
+.ticketlist, #twitter {
+	width: 31%;
+	float: left;
+	margin-left: 2%;
+}
+.ticketlist .title, .ticketlist .entry {
+	margin-bottom: 3px;
+	background:-webkit-gradient(
+    	linear,
+   	left bottom,
+   	left top,
+    	color-stop(0, rgb(39,39,39)),
+    	color-stop(1, rgb(43,43,43)));
+	background: -moz-linear-gradient(
+    	center bottom,
+    	rgb(39,39,39) 0%,
+    	rgb(43,43,43) 100%
+	);
+	padding: 0 5px 0 5px;
+	width: 100%;
+}
+.ticketlist .title {
+	font-weight: bold;
+	color: gray;
+}
+
+.ticketlist .entry {
+	width: 100%;
+	line-height: 25px;
+	height: 25px;
+	vertical-align: middle;
+	float: left;
+	clear: left;
+	overflow: hidden;
+
+}
+.ticketlist .newticket {
+	background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, rgb(107,0,0)),
+    color-stop(0.44, rgb(184,0,0)),
+    color-stop(1, rgb(179,0,0))
+);
+}
+.exclamation {
+	float: right;
+	margin: 4px 2px 0 0 ;
+}
+#twitter {
+	width: 31%;
+	height: 171px;
+	background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, rgb(121,236,254)),
+    color-stop(1, rgb(188,240,248))
+);
+	background:-moz-linear-gradient(
+    center bottom,
+    rgb(121,236,254) 0%,
+    rgb(188,240,248) 100%
+);
+	position: relative;
+	color: black;
+}
+#bird {
+	position: absolute;
+	top: -30px;
+	right: -10px;
+}
+#userimage {
+	float: left;
+	margin: 5px;
+}
+#userimage img {
+	border: 1px solid black;
+	width: 42px;
+	height: 42px;
+}
+#userdetails {
+	margin: 5px;
+	float: left;
+	text-align: left;
+}
+#username {
+	font-weight: bold;
+}
+#tweettime {
+	font-weight: bold;
+	color: #3b3b3b;
+	font-size:small;
+	font-style:italic;
+}
+#tweet {
+	width: 97%;
+	height: 70%;
+	overflow: hidden;
+	clear:both;
+	padding-top: 10px;
+	margin-left: 5px;
+	font-style:italic;
+}
+
+#bottomboxes {
+	position: absolute;
+	bottom: 5%;
+	width: 100%;
+	height: 35%;
+}
+#countdown {
+	text-align: center;
+	color:#999999;
+	font-size:larger;
+	margin-bottom: 0px;
+	text-transform: uppercase;
+}
+#countdown span.timeleft {
+	color: white;
+	font-weight: 200;
+}
+#countdown .title {
+	color: #CCCCCC;
+	text-transform: uppercase;
+}
+#timeofday {
+	float: left;
+	height: 75%;
+	margin-left: 2%;
+	margin-top: 1%;
+	background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.37, rgb(193,193,193)),
+    color-stop(0.69, rgb(247,247,247))
+);
+	background: -moz-linear-gradient(
+    center bottom,
+    rgb(193,193,193) 37%,
+    rgb(247,247,247) 69%
+);
+	width: 43%;
+	text-align:center;
+	position: relative;
+}
+#timeofday .icon {
+	position:absolute;
+	left: -30px;
+	top: -30px;
+}
+#timeofday .title {
+	line-height: 200%;
+	font-weight: bold;
+	font-size: larger;
+background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, rgb(107,0,0)),
+    color-stop(0.44, rgb(184,0,0)),
+    color-stop(1, rgb(179,0,0))
+);
+}
+.float-left {
+	width: 175px;
+	float: left;
+}
+#timeofday #month {
+	color: #3b3b3b;
+	font-size: larger;
+}
+#timeofday #day {
+	background-image: url(bg-calendar.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	padding-top: 10px;
+	font-size: 80px;
+	color: black;
+}
+#timeofday #clock {
+	color: black;
+	font-size: x-large;
+}
+#eoccalendar {
+	margin-left: 175px;
+	text-align: left;
+	color: black;
+}
+#eoccalendar ul {
+	padding: 0;
+	margin: 0;
+	
+}
+#eoccalendar ul li {
+
+	padding: 2px 5px 2px 10px;
+	height: 1em;
+	overflow: hidden;
+font-weight: bold;
+}
+#eoccalendar #datetime {
+	float: left;
+	color: #333131;
+	font-weight: normal;
+}
+
+#weather {
+	float: left;
+	height: 75%;
+	margin-left: 2%;
+	margin-top: 1%;
+	width: 25%;
+	position: relative;
+	color: white;
+	background: -webkit-gradient( linear,left bottom, left top, color-stop(0, rgb(9,6,73)), color-stop(1, rgb(54,41,114)));
+	background: -moz-linear-gradient( center bottom,rgb(9,6,73) 0%, rgb(54,41,114) 100%);
+}
+#currentimage {
+	position: absolute;
+	top: -25px;
+	left: -25px;
+	z-index: 100;
+}
+#currently {
+	position: absolute;
+	right: 15px;
+	top: 5px;
+	font-size:xx-large;
+	font-weight:bold;
+	text-align: right;
+}
+#currently .title {
+	font-size: 24px;
+}
+#currently .location {
+	margin-top: 5px;
+	font-size: small;
+	color: #CCCCCC;
+}
+#asof {
+	text-align: left;
+	position: absolute;
+	top: 0;
+	right: 95px;
+	font-size: small;
+	color: gray;
+}
+#forecast {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 50%;
+	text-align: center;
+}
+#forecast0, #forecast1 {
+	float: left;
+	width: 50%;
+}
+#forecast .icon {
+	margin: 0 auto;
+	height: 34px;
+	width: 61px;
+}
+.day {
+	color: #999999;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	background: #09128c;
+}
+#forecast .temp {
+	color: #999999;
+}
+.high, .low {
+	color: #CCCCCC;
+}
+#webcam {
+	float: left;
+	height: 75%;
+	margin-left: 2%;
+	margin-top: 1%;
+	width: 23%;
+	position: relative;
+	color: black;
+}
+#webcam .image {
+	top: 0px;
+	overflow: hidden;
+	height: 100%;
+	
+	background-position: 0px -16px;
+}
+#webcam .icon {
+	position:absolute;
+	right: -5px;
+	top: -45px;
+}
+#direction {
+	font-size: smaller;
+	vertical-align: top;
+}
+#dimmer {
+	opacity: 0.8;
+	filter:alpha(opacity=80);
+	-moz-opacity:0.8;
+	filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+	-khtml-opacity: 0.88;
+	-ms-filter: “progid:DXImageTransform.Microsoft.Alpha(Opacity=80)”;
+	background: black;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	display: none;
+
+}
+#newticketcontainer {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 90%;
+	height: 90%;
+	margin: 4%; 
+	z-index: 1000;
+	border: 2px solid white;
+	font-size: x-large;
+	display: none;
+background:-webkit-gradient(
+    	linear,
+   	left bottom,
+   	left top,
+    	color-stop(0, rgb(39,39,39)),
+    	color-stop(1, rgb(43,43,43)));
+	background: -moz-linear-gradient(
+    	center bottom,
+    	rgb(39,39,39) 0%,
+    	rgb(43,43,43) 100%
+	);
+}
+.alertbanner, .alertbannerbottom {
+	background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, rgb(107,0,0)),
+    color-stop(0.44, rgb(184,0,0)),
+    color-stop(1, rgb(179,0,0))
+);
+	width: 100%;
+	text-align: center;
+	padding: 15px 0 15px 0;
+	font-size: xx-large;
+	font-weight: bold;
+}
+.alertbannerbottom {
+	position: absolute;
+	bottom: 0;
+	zindex: 1050;
+}
+#subject {
+	text-align: center;
+	font-weight: bold;
+	padding: 15px;
+	border-bottom: 2px solid gray;
+background:-webkit-gradient(
+    	linear,
+   	left bottom,
+   	left top,
+    	color-stop(0, rgb(39,39,39)),
+    	color-stop(1, rgb(43,43,43)));
+	background: -moz-linear-gradient(
+    	center bottom,
+    	rgb(39,39,39) 0%,
+    	rgb(43,43,43) 100%
+	);
+}
+.details {
+	padding: 5px;
+}
+.label {
+	float: left;
+	width: 200px;
+	clear: left;
+	font-weight: bold;
+}
+.message {
+	clear: left;
+	padding: 20px;
+	font-weight: bold;
+}/* liScroll styles */
+
+#rsstickercontainer {position: absolute; bottom: 0; width: 100%; border-top: 1px solid gray; height: 32px; }
+#feedicon {
+position: absolute;
+bottom: 0;
+left: 0;
+}
+
+.tickercontainer { /* the outer div with the black border */
+
+width: 100%; 
+height: 28px; 
+margin: 0; 
+padding: 0
+padding-top: 4px;
+position: absolute;
+bottom: 0;
+overflow: hidden; 
+}
+.tickercontainer .mask { /* that serves as a mask. so you get a sort of padding both left and right */
+position: relative;
+left: 40px;
+width: 98%;
+overflow: hidden;
+}
+ul.newsticker { /* that's your list */
+position: relative;
+left: 1360px;
+list-style-image: url(resultset_next.png);
+margin: 0;
+padding: 0;
+
+}
+ul.newsticker li {
+float: left; /* important: display inline gives incorrect results when you check for elem's width */
+margin: 0;
+padding: 0;
+
+}
+ul.newsticker span {
+white-space: nowrap;
+margin: 0 50px 0 0;
+} 
+
